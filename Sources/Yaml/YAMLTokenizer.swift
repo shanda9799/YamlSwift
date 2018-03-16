@@ -107,10 +107,12 @@ private let tokenPatterns: [TokenPattern] = [
   (.stringSQ, Yaml.Regex.regex("^'([^']|'')*'")),
   (.stringFO, Yaml.Regex.regex("^\(plainOutPattern)(?=:([ \\t]|\(bBreak))|\(bBreak)|$)")),
   (.stringFI, Yaml.Regex.regex("^\(plainInPattern)")),
+  
 ]
 
 extension Yaml {
   static func escapeErrorContext (_ text: String) -> String {
+
     let endIndex = text.index(text.startIndex, offsetBy: 50, limitedBy: text.endIndex) ?? text.endIndex
     let escaped = String(text[..<endIndex])
       |> Yaml.Regex.replace(Yaml.Regex.regex("\\r"), template: "\\\\r")
